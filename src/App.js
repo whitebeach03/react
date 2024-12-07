@@ -1,15 +1,21 @@
 // import logo from './logo.svg';
+import { Prev } from 'react-bootstrap/esm/PageItem';
 import './App.css';
 import React, { useState } from 'react';
 
 function App() {
 
   const [todo, setTodo] = useState('');
+  const [todolist, setTodolist] = useState([]);
 
-  function SetTodo() {
-    return (
-      <button>確定</button>
-    );
+
+  const handleTodo = (e) => {
+    setTodo(e.target.value);
+  };
+
+  function handleButtonClick() {
+      alert('入力されたToDo: ' + todo)
+      setTodolist((prev) => [...prev, todo])
   }
 
   return (
@@ -20,11 +26,20 @@ function App() {
       <input 
         type='text'  
         placeholder='ToDoの入力' 
+        onChange={handleTodo}
       />
 
-      <SetTodo />
+      <button onClick={handleButtonClick}> ケツ穴確定ボタン </button>
 
-      <p>入力されたToDo: {todo}</p>
+      {
+        todolist.map(
+           (todo, index) => {
+            return (
+              <p key={index}>{todo}</p>
+            );
+           }
+        )
+      }
 
     </div>
   );
